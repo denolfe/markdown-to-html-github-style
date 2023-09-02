@@ -1,8 +1,9 @@
 var showdown  = require('showdown');
 var fs = require('fs');
-let filename = process.argv[4] || "README.md"
+var path = require('path');
+let readmePath = path.resolve(process.argv[3]) || "README.md"
 let pageTitle = process.argv[2] || ""
-let plausibleDomain = process.argv[3] || ""
+// let plausibleDomain = process.argv[3] || ""
 var hljs = require ('highlight.js');
 
 showdown.extension('highlight', function () {
@@ -36,10 +37,10 @@ showdown.extension('highlight', function () {
 });
 
 fs.readFile(__dirname + '/style.css', function (err, styleData) {
-  fs.readFile(__dirname + '/node_modules/highlight.js/styles/atom-one-dark.css', function(err, highlightingStyles) {
-    fs.readFile(process.cwd() + '/' + filename, function (err, data) {
+  fs.readFile(__dirname + '/node_modules/highlight.js/styles/vs2015.css', function(err, highlightingStyles) {
+    fs.readFile(readmePath, function (err, data) {
       if (err) {
-        throw err; 
+        throw err;
       }
       let text = data.toString();
 
@@ -58,11 +59,6 @@ fs.readFile(__dirname + '/style.css', function (err, styleData) {
           <meta name="viewport" content="width=device-width, initial-scale=1">
           <meta charset="UTF-8">`
 
-      if (plausibleDomain.length > 0) {
-        preContent += `
-          <script defer data-domain="` + plausibleDomain + `" src="https://plausible.io/js/script.js"></script>
-        `
-      }
       preContent += `
         </head>
         <body>
@@ -80,15 +76,13 @@ fs.readFile(__dirname + '/style.css', function (err, styleData) {
       html = preContent + converter.makeHtml(text) + postContent
 
       converter.setFlavor('github');
-      // console.log(html);
 
-      let markdownFileNameWithoutPath = filename.replace(".md", ".html")
-      let filePath = process.cwd() + "/" + markdownFileNameWithoutPath
-      fs.writeFile(filePath, html, { flag: "wx" }, function(err) {
+      let outputPath = readmePath.replace(".md", ".html")
+      fs.writeFile(outputPath, html, { flag: "w" }, function(err) {
         if (err) {
-          console.log("File '" + filePath + "' already exists. Aborted!");
+          console.log("File '" + outputPath + "' already exists. Aborted!");
         } else {
-          console.log("Done, saved to " + filePath);
+          console.log("Done, saved to " + outputPath);
         }
       });
     });
