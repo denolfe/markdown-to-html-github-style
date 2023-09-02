@@ -1,6 +1,14 @@
 {
-    "dependencies": {
-        "highlight.js": "^11.7",
-        "showdown": "^1.9.0"
-    }
+  "scripts": {
+    "convert": "ts-node -T ./src/convert.ts"
+  },
+  "dependencies": {
+    "highlight.js": "^11.7",
+    "showdown": "^1.9.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.5.8",
+    "@types/showdown": "^2.0.1",
+    "ts-node": "^10.9.1"
+  }
 }
