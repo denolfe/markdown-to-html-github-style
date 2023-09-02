@@ -1,7 +1,7 @@
 body {
     font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #111;
-    background-color: #fbfbfb;
+    background-color: #FFFFFF;
     -webkit-text-size-adjust: 100%;
     -webkit-font-feature-settings: "kern" 1;
     -moz-font-feature-settings: "kern" 1;
@@ -48,13 +48,6 @@ hr {
     color: #868686;
     /* There is a bug where the syntax highlighter would pick no color for e.g. `&&` symbols in the code samples. Let's overwrite this */
 }
-
-
-.hljs-property {
-    color: #ffffff;
-    /* Rendering bug for process.env.VALUE */
-}
-
 
 /**
  * Links

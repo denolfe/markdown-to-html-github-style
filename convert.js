@@ -36,8 +36,7 @@ showdown.extension('highlight', function () {
   }];
 });
 
-fs.readFile(__dirname + '/style.css', function (err, styleData) {
-  fs.readFile(__dirname + '/node_modules/highlight.js/styles/vs2015.css', function(err, highlightingStyles) {
+fs.readFile(__dirname + '/style-vscode-dark-plus.css', function (err, styleData) {
     fs.readFile(readmePath, function (err, data) {
       if (err) {
         throw err;
@@ -69,7 +68,6 @@ fs.readFile(__dirname + '/style.css', function (err, styleData) {
 
           </div>
           <style type='text/css'>` + styleData + `</style>
-          <style type='text/css'>` + highlightingStyles + `</style>
         </body>
       </html>`;
 
@@ -87,4 +85,3 @@ fs.readFile(__dirname + '/style.css', function (err, styleData) {
       });
     });
   });
-});
