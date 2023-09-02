@@ -23,10 +23,8 @@ body {
 body>#content {
     margin: 0px;
     max-width: 900px;
-    border: 1px solid #e1e4e8;
     padding: 10px 40px;
     padding-bottom: 20px;
-    border-radius: 2px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -49,6 +47,12 @@ hr {
 .hljs-operator {
     color: #868686;
     /* There is a bug where the syntax highlighter would pick no color for e.g. `&&` symbols in the code samples. Let's overwrite this */
+}
+
+
+.hljs-property {
+    color: #ffffff;
+    /* Rendering bug for process.env.VALUE */
 }
 
 
