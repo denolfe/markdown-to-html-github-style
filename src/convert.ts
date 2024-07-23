@@ -4,9 +4,16 @@ import path from 'path'
 import hljs from 'highlight.js'
 
 async function main() {
-  let converter: showdown.Converter
   const readmePath = path.resolve(process.argv?.[2] || 'README.md')
+  const readmeContent = await fs.promises.readFile(readmePath, 'utf-8')
+  const vscodeDarkStyles = await fs.promises.readFile(
+    path.join(__dirname, 'styles/style-vscode-dark-plus.css'),
+    'utf-8',
+  )
+
   console.log('Converting ' + readmePath)
+
+  // Create 'highlight' extension
   showdown.extension('highlight', () => {
     const htmlUnencode = (text: string) => {
       return text.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
@@ -41,13 +48,7 @@ async function main() {
     ]
   })
 
-  const vscodeDarkStyles = await fs.promises.readFile(
-    path.join(__dirname, 'styles/style-vscode-dark-plus.css'),
-    'utf-8',
-  )
-  const readmeContent = await fs.promises.readFile(readmePath, 'utf-8')
-
-  converter = new showdown.Converter({
+  const converter = new showdown.Converter({
     ghCompatibleHeaderId: true,
     simpleLineBreaks: true,
     ghMentions: true,
