@@ -7,7 +7,7 @@ async function main() {
   let converter: showdown.Converter
   const readmePath = path.resolve(process.argv?.[2] || 'README.md')
   console.log('Converting ' + readmePath)
-  showdown.extension('highlight', function () {
+  showdown.extension('highlight', () => {
     const htmlUnencode = (text: string) => {
       return text.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
     }
@@ -15,17 +15,17 @@ async function main() {
     return [
       {
         type: 'output',
-        filter: function (text, converter, options) {
+        filter: (text, converter, options) => {
           const left = '<pre><code\\b[^>]*>',
             right = '</code></pre>',
             flags = 'g'
 
-          const replacement: typeof showdown.helper.replaceRecursiveRegExp = function (
+          const replacement: typeof showdown.helper.replaceRecursiveRegExp = (
             wholeMatch,
             match,
             left,
             right,
-          ) {
+          ) => {
             match = htmlUnencode(match)
             const lang = (left.match(/class=\"([^ \"]+)/) || [])[1]
             left = left.slice(0, 18) + 'hljs ' + left.slice(18)
