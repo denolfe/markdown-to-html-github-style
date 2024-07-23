@@ -1,5 +1,9 @@
 {
   "scripts": {
+    "build": "pnpm copyfiles && pnpm build:tsc",
+    "clean": "rm -rf dist",
+    "build:tsc": "tsc",
+    "copyfiles": "copyfiles -u 2 src/styles/* dist/styles",
     "convert": "ts-node -T ./src/convert.ts"
   },
   "dependencies": {
@@ -9,6 +13,7 @@
   "devDependencies": {
     "@types/node": "^20.5.8",
     "@types/showdown": "^2.0.1",
+    "copyfiles": "^2.4.1",
     "ts-node": "^10.9.1"
   }
 }
